@@ -8,6 +8,7 @@ const { PORT, MONGODB_URI, NODE_ENV,ORIGIN } = require("./config.js");
 
 // routes
 const authRoutes = require("./router/auth.route");
+const countryRoutes = require("./router/country.route");
 
 
 // init express app
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 // routes middlewares
 
 app.use("/api/auth", authRoutes);
+app.use("/api/country", countryRoutes);
 
 
 // page not found error handling  middleware
