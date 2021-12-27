@@ -14,7 +14,7 @@ exports.signup = async (req, res, next) => {
     const phoneExist = await User.findOne({ phone });
 
     if (phoneExist) {
-      res.status(400).json({
+      return res.status(400).json({
         type: "error",
         message: "phone already exists",
         data: {
