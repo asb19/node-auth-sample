@@ -35,10 +35,20 @@ const specs = swaggerJsdoc(options);
 // routes
 const authRoutes = require("./src/router/auth.route");
 const countryRoutes = require("./src/router/country.route");
+const { logError, returnError } = require("./src/handlers/error.handler");
 
 
 // init express app
 const app = express();
+
+app.use(
+  cors({
+    credentials: true,
+    origin: ORIGIN,
+    optionsSuccessStatus: 200,
+  })
+);
+
 
 // middlewares
 
@@ -47,28 +57,10 @@ const messageMap = {
   0: "error"
 }
 
-app.use((req, res, next) => {
-  const originJson = res.json
-  res.json = (status, jsonData) => {
-      const fixedResponse = {
-          status,
-          message: messageMap[status]
-      }
-      originJson.call(res, {...jsonData, ...fixedResponse})
-  }
-  next()
-})
-
 
 
 app.use(express.json());
-app.use(
-  cors({
-    credentials: true,
-    origin: ORIGIN,
-    optionsSuccessStatus: 200,
-  })
-);
+
 
 
 // index route
@@ -89,6 +81,15 @@ app.use("/api/country", countryRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
+
+
+
+app.use(logError)
+app.use(returnError)
+
+
+
+
 // page not found error handling  middleware
 
 app.use("*", (req, res, next) => {
@@ -98,6 +99,8 @@ app.use("*", (req, res, next) => {
   };
   next(error);
 });
+
+
 
 
 async function main() {
