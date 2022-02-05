@@ -87,7 +87,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(logError)
 app.use(returnError)
 
-
+app.use('/hello', (req,res)=>{
+  res.send(`Hello from process- ${process.pid}`)
+})
 
 
 // page not found error handling  middleware
