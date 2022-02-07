@@ -25,5 +25,6 @@ jobs:
         script: |
           cd ~/node-auth-sample
           git pull origin master
+          ls
           npm install
           pm2 restart node-app
