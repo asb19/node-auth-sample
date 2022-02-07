@@ -23,7 +23,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd node-auth-sample/
+          cd ~/node-auth-sample
           git pull origin master
           npm install
           pm2 restart node-app
