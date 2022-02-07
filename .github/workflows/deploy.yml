@@ -34,14 +34,13 @@ jobs:
   # uses: appleboy/ssh-action@1d1b21ca96111b1eb4c03c21c14ebb971d2200f6
       uses: appleboy/ssh-action@v0.1.4
       with:
+        key: ${{secrets.SSH_KEY}}
         # ssh host
         host: ${{secrets.SSH_HOST}}
-        # ssh port
-        port: ${{secrets.SSH_PORT}}
         # ssh username
         username: ${{secrets.SSH_USER}}
         #key
-        key: ${{secrets.SSH_KEY}}
+        
 
         script: |
           pm2 delete all
