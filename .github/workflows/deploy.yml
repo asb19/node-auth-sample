@@ -44,6 +44,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd ~/node-auth-sample
+          pm2 delete all
           git pull origin master
           npm install
-          pm2 restart node-app
+          pm2 start app.js --name node-app -i 3
