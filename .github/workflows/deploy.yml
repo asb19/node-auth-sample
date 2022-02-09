@@ -43,7 +43,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd /project/node-auth-sample/
+          cd project/node-auth-sample/
           pm2 delete all
           git pull origin master
           npm install
